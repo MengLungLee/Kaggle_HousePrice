@@ -23,10 +23,14 @@ As we can see, the region is also associated with Sale Price and then dummies by
 
 <img src="https://github.com/MengLungLee/Kaggle_HousePrice/blob/master/EDA_screenshot/region.png" width="300" height="200">
 
-Finally, I selected the top 15 features of high coefficient with SalePrice through heatmap.
+I selected the top 15 features of high coefficient with SalePrice through heatmap.
 According to occam's razor rule, I decided to drop some features that similar to each other, making the model much simple.
 
 <img src="https://github.com/MengLungLee/Kaggle_HousePrice/blob/master/EDA_screenshot/top15_heatmap.png" width="350" height="250">
+
+Finally, I handle categorical features through two ways to match feature properties.
+One is Label Encoding, which I was mapping the level of condition from 5 to 0 (5 is best, 0 is worst)
+The other one is One-hot Encoding, in which the location would affect the sale price of houses. 
 
 ### Model building and Model Performance
 
