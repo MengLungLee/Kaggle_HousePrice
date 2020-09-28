@@ -45,19 +45,21 @@ class Net(torch.nn.Module):
         super(Net, self).__init__()
 
         self.hidden1 = torch.nn.Linear(n_feature, n_hidden)
-        self.hidden2 = torch.nn.Linear(n_hidden, 25)
+        self.hidden2 = torch.nn.Linear(n_hidden, 100)
+        self.hidden3 = torch.nn.Linear(100, 50)
+        self.hidden4 = torch.nn.Linear(50, 25)
         self.predict = torch.nn.Linear(25, n_output)
-
-        #self.dropout1 = torch.nn.Dropout(0.1)
-        #self.dropout2 = torch.nn.Dropout(0.1)
+    
     def forward(self, x):
         
         x = F.relu(self.hidden1(x))
         x = F.relu(self.hidden2(x))
+        x = F.relu(self.hidden3(x))
+        x = F.relu(self.hidden4(x))
         x = self.predict(x)
         return x
 
-model = Net(n_feature = 50, n_hidden = 25, n_output = 1).to(device)
+model = Net(n_feature = 50, n_hidden = 200, n_output = 1).to(device)
 
 def RMSEloss(y, prediction):
     return torch.sqrt(torch.mean((prediction - y) **2))
@@ -68,7 +70,7 @@ train_loss_list, val_loss_list = [], []
 model.train()
 total_step = len(loader)
 
-for epoch in range(400):
+for epoch in range(1000):
     train_loss = 0
     for step, (batch_x, batch_y) in enumerate(loader):
         
@@ -90,7 +92,7 @@ for epoch in range(400):
 
         train_loss_list.append(train_loss/len(loader))
         val_loss_list.append(val_loss)
-        print("Epoch: {}/{}.. ".format(epoch+1, 400),
+        print("Epoch: {}/{}.. ".format(epoch+1, 1000),
               "Training Loss: {:.3f}.. ".format(train_loss/len(loader)),
               "Validation Loss: {:.3f}.. ".format(val_loss))
 
@@ -100,10 +102,7 @@ plt.legend(frameon=False)
 print("Difference between Max SalePrice and Min SalePrice {}" .format(max(np.exp(output.numpy())) - min(np.exp(output.numpy()))))
 
 #%%
-# Evaluate model score through r2_score from sklearn
-from sklearn.metrics import r2_score
-score = r2_score(yv_validation, output, multioutput='variance_weighted')
-print("Model Scoring {:.2f}" .format(score))
+# RMSE of training data set
 print('RMSLE score on train data:{:.4f}' .format(RMSEloss(batch_y, prediction)))
-
+print('RMSLE score on Validation data:{:.4f}' .format(RMSEloss(yv_validation_tensor, output)))
 #%%

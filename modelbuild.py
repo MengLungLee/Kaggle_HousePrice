@@ -27,19 +27,21 @@ class Net(torch.nn.Module):
         super(Net, self).__init__()
 
         self.hidden1 = torch.nn.Linear(n_feature, n_hidden)
-        self.hidden2 = torch.nn.Linear(n_hidden, 25)
+        self.hidden2 = torch.nn.Linear(n_hidden, 100)
+        self.hidden3 = torch.nn.Linear(100, 50)
+        self.hidden4 = torch.nn.Linear(50, 25)
         self.predict = torch.nn.Linear(25, n_output)
-
-        #self.dropout1 = torch.nn.Dropout(0.1)
-        #self.dropout2 = torch.nn.Dropout(0.1)
+    
     def forward(self, x):
         
         x = F.relu(self.hidden1(x))
         x = F.relu(self.hidden2(x))
+        x = F.relu(self.hidden3(x))
+        x = F.relu(self.hidden4(x))
         x = self.predict(x)
         return x
 
-model = Net(n_feature = 50, n_hidden = 25, n_output = 1).to(device)
+model = Net(n_feature = 50, n_hidden = 200, n_output = 1).to(device)
 
 
 #%%
@@ -51,7 +53,7 @@ X_test_tensor = torch.from_numpy(X_test.to_numpy())
 
 torch_dataset = Data.TensorDataset(X_train_tensor, Y_train_tensor)
 
-batch_size = 150
+batch_size = 120
 
 loader = Data.DataLoader(
     dataset = torch_dataset,
