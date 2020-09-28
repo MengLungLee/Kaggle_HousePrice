@@ -12,7 +12,9 @@ https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data
 Pandas  Numpy Scikit-learn  Pytorch
 
 ### Exploratory Data Analysis 
-At first, I checked all features and then considered the Sale Price of house that would be related to the houses' age.
+At first, I checked all features and handled the missing values. I drop up features, which have many missing value.(on cleaning.py)
+
+And then considered the Sale Price of house that would be related to the houses' age.
 Thus, I created a new feature, House_ages, through 'year sold' deducting 'year built' and group it.
 As my expectations, houses' age would affect the Sale Price.
 
