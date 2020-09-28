@@ -14,6 +14,7 @@ Pandas  Numpy Scikit-learn  Pytorch
 ### Exploratory Data Analysis 
 At first, I checked all features and then considered the Sale Price of house that would be related to the houses' age.
 Thus, I created a new feature, House_ages, through 'year sold' deducting 'year built' and group it.
+As my expectations, houses' age would affect the Sale Price.
 
 <img src="https://github.com/MengLungLee/Kaggle_HousePrice/blob/master/EDA_screenshot/house_ages.png" width="300" height="200">
 
@@ -47,7 +48,7 @@ After that, I applied the same parameters to train whole training sets and then 
 
 RMSE of whole training sets: 0.0975
 
-### Concluded
+### Conclusion
 
 Finally, I got 3387/4701 on the leaderboard with a score of 0.15322, which means it is not a good outcome. (09/28/2020)
 
