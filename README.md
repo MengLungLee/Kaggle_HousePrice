@@ -44,7 +44,7 @@ I set up some parameters below and followed the competition for the loss functio
 
 batch_size = 120, epoch = 1000, optimizer = Adam, learning rate = 0.001, 4 hidden layers with Relu.
 
-I tried many times by setting a neural network.
+I tried many times by setting a neural network and applied the holdout method to evaluate the model performance
 
 <img src="https://github.com/MengLungLee/Kaggle_HousePrice/blob/master/ModelBuilding_screenshot/Validation%20loss.png" width="250" height="200">
 
